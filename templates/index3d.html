@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta property="og:image" content="/static/img/grumpy_cat_big.jpg"/>
+	<title>Grumpy Cat Agility Mapper - Cheezburger edition</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<style>
+		body
+		{
+			font-family: Monospace;
+			font-weight: bold;
+			background-color: #ccccff;
+			margin: 0px;
+			overflow: hidden;
+		}
+	</style>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r56/three.min.js"></script>
+<script src="/static/fonts/helvetiker_bold.typeface.js"></script>
+<script src="/static/js/import/Detector.js"></script>
+<script src="/static/js/import/TrackballControls.js"></script>
+<script src="/static/js/import/THREEx.WindowResize.js"></script>
+<script src="/static/js/import/THREEx.KeyboardState.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/static/js/common.js"></script>
+<script src="/static/js/script3d.js"></script>
+<script src="/static/js/models.js"></script>
+
+<script>
+
+// standard global variables
+// XXX: Get rid of these!
+var container, scene, topCamera, chaseCamera, isChaseCameraActive, renderer, controls, canChangeCamera;
+var clock = new THREE.Clock();
+
+		$(document).ready(function() {
+			initialize_scene();
+
+			load_state_from_backend($("#courseid").text());
+			var jsonLoader = new THREE.JSONLoader();
+			jsonLoader.load( "/static/models/android-animations.js", addAndroidToScene );
+
+			animate();
+		});
+</script>
+
+</head>
+<body>
+	<div id="courseid" style="display:none">{{ . }}</div>
+</body>
+</html>
